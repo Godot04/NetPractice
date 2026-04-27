@@ -97,7 +97,7 @@ What this level trains:
 
 - default route behavior on hosts and routers
 - difference between local route knowledge and internet-facing paths
-- How to set up the smallest possible routing table that still allows full communication across the whole network.
+- Setting up the smallest possible routing table that still allows full communication across the whole network.
 
 ### Level 7
 
@@ -106,7 +106,6 @@ Focus: communication across multiple router links.
 What this level trains:
 
 - coordinating host and router routes together
-- keeping point-to-point and LAN masks coherent
 - avoiding asymmetric routing paths
 
 ### Level 8
@@ -116,18 +115,17 @@ Focus: route precision in a multi-router topology.
 What this level trains:
 
 - adding specific routes toward remote subnets
-- selecting the correct next hop
 - preventing route conflicts between directly connected and remote networks
 
 ### Level 9
 
-Focus: larger topology with several networks and route entries.
+Focus: working with a bigger network that has many subnets and multiple routing rules.
 
 What this level trains:
 
 - organizing routing logic for multiple destinations
 - balancing default routes and more specific static routes
-- troubleshooting complex reachability failures step by step
+- finding and fixing difficult connection problems by checking the network one part at a time.
 
 ### Level 10
 
@@ -137,41 +135,13 @@ What this level trains:
 
 - end-to-end reasoning from host to internet and between remote LANs
 - mixed mask handling across many interfaces
-- complete static routing strategy in a realistic mini-infrastructure
+- complete static routing strategy in a mini-infrastructure
 
 ## What I learned
 
-After finishing all exercises, I improved in:
+After finishing all exercises I improved in:
 
 - converting quickly between dotted masks and CIDR prefixes
-- computing network, usable host range, and broadcast without guesswork
+- computing network, usable host range, and broadcast
 - choosing correct default gateways based on topology
-- writing static routes with proper destination and next-hop logic
 - debugging failures methodically: interface first, subnet second, route third
-
-I also learned a practical mindset: do not change random values, always validate each change against packet path logic.
-
-## Subject and evaluation notes
-
-Based on the subject, evaluation includes solving random levels in a limited time during defense, so understanding the method is more important than memorizing values.
-
-This README is intentionally focused on concepts and workflow rather than publishing per-level answer values.
-
-## Resources
-
-- 42 NetPractice subject PDF
-- IPv4 and CIDR subnetting references
-- Routing fundamentals (default route, longest-prefix match, next hop)
-
-## AI usage
-
-AI assistance was used for:
-
-- proofreading and structuring documentation
-- improving explanation clarity
-
-All networking configurations and problem solving were completed manually in the NetPractice simulator.
-
-## License
-
-Project license is available in net_practice/License.
