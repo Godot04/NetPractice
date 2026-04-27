@@ -2,215 +2,183 @@
 
 This project was completed as part of the 42 curriculum.
 
-NetPractice is a browser-based networking lab where each level gives a broken topology and a set of communication goals. The objective is to fix IP addressing, subnet masks, and routing tables so every required host can reach the others.
+NetPractice is a practical introduction to computer networking. Instead of memorizing theory only, each level gives a broken network topology and asks you to make communication work again.
 
-All exercises in this repository are solved.
+## Project purpose
+
+The goal of NetPractice is to build strong fundamentals in:
+
+- IPv4 addressing
+- subnet masks and CIDR notation
+- network range and host range calculation
+- default gateways
+- static routing
+- multi-subnet communication through routers
+
+In short: understand why packets do or do not reach their destination, then fix the configuration.
+
+## How the project works
+
+Each level contains machines, links, and communication objectives. Some values are correct and some are intentionally wrong.
+
+Your task is to:
+
+1. Analyze the topology.
+2. Identify broken IP, mask, or route parameters.
+3. Configure only what is editable.
+4. Validate that all required hosts can reach each other.
+
+The difficulty increases from simple local subnet checks to multi-router routing decisions.
 
 ## Repository structure
 
-- `net_practice/` - web simulator files (HTML/CSS/JS + assets)
-- `Tasks/` - solved values per level (`level1.json` ... `level10.json`)
+- net_practice/ - simulator files (HTML, CSS, JS, images)
+- Tasks/ - exported solved configurations for levels 1 to 10
+- README.md - project documentation
 
-## What I learned
+## Running locally
 
-- IPv4 addressing and subnetting (`/25`, `/26`, `/27`, `/30`, etc.)
-- How to detect wrong host/network/broadcast assignments
-- Static routing and default gateway design
-- Multi-router path construction and route specificity
-- Troubleshooting end-to-end connectivity in segmented networks
+1. Open net_practice/index.html in a browser.
+2. Pick a level.
+3. Fix the editable fields (IP, mask, routes, gateways).
+4. Verify the reachability goals in the simulator.
 
-## How to run locally
+Note: the subject mentions running through a helper script in some setups, but this repository currently uses the browser entry point above.
 
-1. Open `net_practice/index.html` in a browser.
-2. Select a level.
-3. Apply IP/mask/route fixes.
-4. Validate reachability goals in the simulator.
-
-## Exercise solutions
-
-Below is the final answer key based on the solved files in `Tasks/`.
+## Level-by-level purpose
 
 ### Level 1
 
-Interfaces:
+Focus: basic host-to-host addressing in isolated segments.
 
-- `A1.ip = 104.94.23.13`
-- `D1.ip = 211.191.170.76`
+What this level trains:
+
+- reading an IP pattern
+- assigning a valid address in the expected subnet
+- avoiding invalid octet values
 
 ### Level 2
 
-Interfaces:
+Focus: matching hosts inside one subnet with the correct mask.
 
-- `A1.ip = 192.168.150.221`
-- `B1.mask = 255.255.255.224`
-- `C1.ip = 192.168.150.1`
-- `D1.ip = 192.168.150.2`
+What this level trains:
+
+- identifying whether two hosts are in the same network
+- selecting a mask that allows required communication
+- validating host addresses against network and broadcast boundaries
 
 ### Level 3
 
-Interfaces:
+Focus: subnet mask impact on LAN communication through a switch.
 
-- `A1.mask = 255.255.255.128`
-- `B1.ip = 104.198.29.124`
-- `B1.mask = 255.255.255.128`
-- `C1.ip = 104.198.29.126`
+What this level trains:
+
+- why L2 connectivity is not enough without consistent L3 configuration
+- how mask mismatch breaks host reachability
 
 ### Level 4
 
-Interfaces:
+Focus: first router-based segmentation.
 
-- `A1.mask = 255.255.255.128`
-- `B1.ip = 119.177.113.131`
-- `B1.mask = 255.255.255.128`
-- `R1.ip = 119.177.113.130`
-- `R1.mask = /25`
+What this level trains:
+
+- assigning router interface addresses correctly
+- understanding that each router interface belongs to a different subnet
+- checking host-router subnet consistency
 
 ### Level 5
 
-Interfaces:
+Focus: introducing static routes and default gateways.
 
-- `A1.ip = 21.220.165.125`
-- `A1.mask = /25`
-- `B1.ip = 138.64.139.253`
-- `B1.mask = /18`
+What this level trains:
 
-Routes:
-
-- `Ar1.route = default`
-- `Ar1.gate = 21.220.165.126`
-- `Br1.gate = 138.64.139.254`
+- when to use a default route
+- how hosts forward traffic outside their local subnet
+- gateway selection based on directly connected router interface
 
 ### Level 6
 
-Interfaces:
+Focus: routing from local network to an external network.
 
-- `A1.mask = /25`
-- `R1.ip = 21.51.23.226`
+What this level trains:
 
-Routes:
-
-- `Ar1.route = default`
-- `Ar1.gate = 21.51.23.226`
-- `Rr1.route = default`
-- `Ir1.route = 21.51.23.128/25`
+- default route behavior on hosts and routers
+- distinction between local route knowledge and internet-facing paths
+- designing minimal routing entries for complete reachability
 
 ### Level 7
 
-Interfaces:
+Focus: communication across multiple router links.
 
-- `A1.ip = 101.198.14.2`
-- `A1.mask = /26`
-- `C1.ip = 101.198.14.116`
-- `C1.mask = /26`
-- `R11.mask = /26`
-- `R12.mask = /26`
-- `R21.ip = 101.198.14.253`
-- `R21.mask = /26`
-- `R22.ip = 101.198.14.117`
-- `R22.mask = /26`
+What this level trains:
 
-Routes:
-
-- `Ar1.route = default`
-- `Ar1.gate = 101.198.14.1`
-- `Cr1.route = default`
-- `Cr1.gate = 101.198.14.117`
-- `R1r1.route = default`
-- `R1r1.gate = 101.198.14.253`
-- `R2r1.route = default`
-- `R2r1.gate = 101.198.14.254`
+- coordinating host and router routes together
+- keeping point-to-point and LAN masks coherent
+- avoiding asymmetric routing paths
 
 ### Level 8
 
-Interfaces:
+Focus: route precision in a multi-router topology.
 
-- `C1.ip = 131.62.36.19`
-- `C1.mask = /28`
-- `D1.ip = 131.62.36.2`
-- `R13.ip = 131.62.36.62`
-- `R13.mask = /28`
-- `R21.ip = 131.62.36.61`
-- `R21.mask = /28`
-- `R22.ip = 131.62.36.18`
-- `R22.mask = /28`
-- `R23.ip = 131.62.36.1`
-- `R23.mask = /28`
+What this level trains:
 
-Routes:
-
-- `Cr1.route = default`
-- `Cr1.gate = 131.62.36.18`
-- `Dr1.route = default`
-- `Dr1.gate = 131.62.36.1`
-- `R1r2.route = 131.62.36.0/26`
-- `R1r2.gate = 131.62.36.61`
-- `R2r1.route = default`
-- `Ir1.gate = 163.74.250.12`
+- adding specific routes toward remote subnets
+- selecting the correct next hop
+- preventing route conflicts between directly connected and remote networks
 
 ### Level 9
 
-Interfaces:
+Focus: larger topology with several networks and route entries.
 
-- `A1.ip = 1.2.3.3`
-- `A1.mask = /25`
-- `B1.ip = 1.2.3.2`
-- `B1.mask = /25`
-- `C1.ip = 6.7.8.2`
-- `C1.mask = /24`
-- `D1.ip = 58.85.11.129`
-- `D1.mask = /18`
-- `R11.ip = 1.2.3.1`
-- `R13.ip = 5.4.3.2`
-- `R13.mask = 255.255.255.252`
-- `R21.ip = 5.4.3.1`
-- `R22.ip = 6.7.8.1`
-- `R22.mask = /24`
-- `R23.ip = 58.85.11.128`
+What this level trains:
 
-Routes:
-
-- `Ar1.route = default`
-- `Ar1.gate = 1.2.3.1`
-- `Br1.route = default`
-- `Br1.gate = 1.2.3.1`
-- `Cr1.gate = 6.7.8.1`
-- `Dr1.route = default`
-- `R1r1.route = 58.85.11.0/18`
-- `R1r1.gate = 5.4.3.1`
-- `R1r2.route = 6.7.8.0/24`
-- `R1r2.gate = 5.4.3.1`
-- `R2r1.gate = 5.4.3.2`
-- `Ir1.route = 1.2.3.0/25`
-- `Ir2.route = 58.85.11.0/18`
-- `Ir3.route = 6.7.8.0/24`
+- organizing routing logic for multiple destinations
+- balancing default routes and more specific static routes
+- troubleshooting complex reachability failures step by step
 
 ### Level 10
 
-Interfaces:
+Focus: final integration challenge.
 
-- `H11.mask = /25`
-- `H21.ip = 136.197.8.3`
-- `H21.mask = /25`
-- `H31.ip = 136.197.8.194`
-- `H31.mask = /27`
-- `R13.mask = /30`
-- `R22.ip = 136.197.8.193`
-- `R22.mask = /27`
-- `R23.ip = 136.197.8.129`
-- `R23.mask = /26`
+What this level trains:
 
-Routes:
+- end-to-end reasoning from host to internet and between remote LANs
+- mixed mask handling across many interfaces
+- complete static routing strategy in a realistic mini-infrastructure
 
-- `H3r1.gate = 136.197.8.193`
-- `R1r1.route = default`
-- `Ir1.route = 136.197.8.0/0`
+## What I learned
 
-## Notes
+After finishing all exercises, I improved in:
 
-- Route names (`Ar1`, `R1r1`, etc.) and interface IDs (`A1`, `R22`, etc.) are the simulator identifiers.
-- CIDR and dotted masks are both used by NetPractice depending on the level.
-- The solved values are taken directly from the JSON files in `Tasks/`.
+- converting quickly between dotted masks and CIDR prefixes
+- computing network, usable host range, and broadcast without guesswork
+- choosing correct default gateways based on topology
+- writing static routes with proper destination and next-hop logic
+- debugging failures methodically: interface first, subnet second, route third
+
+I also learned a practical mindset: do not change random values, always validate each change against packet path logic.
+
+## Subject and evaluation notes
+
+Based on the subject, evaluation includes solving random levels in a limited time during defense, so understanding the method is more important than memorizing values.
+
+This README is intentionally focused on concepts and workflow rather than publishing per-level answer values.
+
+## Resources
+
+- 42 NetPractice subject PDF
+- IPv4 and CIDR subnetting references
+- Routing fundamentals (default route, longest-prefix match, next hop)
+
+## AI usage
+
+AI assistance was used for:
+
+- proofreading and structuring documentation
+- improving explanation clarity
+
+All networking configurations and problem solving were completed manually in the NetPractice simulator.
 
 ## License
 
-Project license is available in `net_practice/License`.
+Project license is available in net_practice/License.
