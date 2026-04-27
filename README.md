@@ -2,20 +2,18 @@
 
 This project was completed as part of the 42 curriculum.
 
-NetPractice is a practical introduction to computer networking. Instead of memorizing theory only, each level gives a broken network topology and asks you to make communication work again.
+NetPractice is a practical introduction to computer networking. Instead of memorizing theory only, each level gives an example of broken network and asks you to make users communication work again.
 
 ## Project purpose
 
 The goal of NetPractice is to build strong fundamentals in:
 
 - IPv4 addressing
-- subnet masks and CIDR notation
+- subnet masks
 - network range and host range calculation
 - default gateways
 - static routing
 - multi-subnet communication through routers
-
-In short: understand why packets do or do not reach their destination, then fix the configuration.
 
 ## How the project works
 
@@ -34,16 +32,13 @@ The difficulty increases from simple local subnet checks to multi-router routing
 
 - net_practice/ - simulator files (HTML, CSS, JS, images)
 - Tasks/ - exported solved configurations for levels 1 to 10
-- README.md - project documentation
 
 ## Running locally
 
 1. Open net_practice/index.html in a browser.
 2. Pick a level.
 3. Fix the editable fields (IP, mask, routes, gateways).
-4. Verify the reachability goals in the simulator.
-
-Note: the subject mentions running through a helper script in some setups, but this repository currently uses the browser entry point above.
+4. Verify correctness of that network. 
 
 ## Level-by-level purpose
 
@@ -55,7 +50,7 @@ What this level trains:
 
 - reading an IP pattern
 - assigning a valid address in the expected subnet
-- avoiding invalid octet values
+- avoiding an invalid IP range
 
 ### Level 2
 
@@ -73,8 +68,7 @@ Focus: subnet mask impact on LAN communication through a switch.
 
 What this level trains:
 
-- why L2 connectivity is not enough without consistent L3 configuration
-- how mask mismatch breaks host reachability
+- How devices can be connected at the same switch but they still need matching IP settings (address, subnet mask, gateway) to communicate successfully.
 
 ### Level 4
 
@@ -84,7 +78,6 @@ What this level trains:
 
 - assigning router interface addresses correctly
 - understanding that each router interface belongs to a different subnet
-- checking host-router subnet consistency
 
 ### Level 5
 
@@ -103,8 +96,8 @@ Focus: routing from local network to an external network.
 What this level trains:
 
 - default route behavior on hosts and routers
-- distinction between local route knowledge and internet-facing paths
-- designing minimal routing entries for complete reachability
+- difference between local route knowledge and internet-facing paths
+- How to set up the smallest possible routing table that still allows full communication across the whole network.
 
 ### Level 7
 
